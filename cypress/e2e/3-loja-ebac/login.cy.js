@@ -1,8 +1,9 @@
 /// <reference types="cypress" />
+const perfil = require('../../fixtures/perfil.json')
 
 describe('Funcionalidade: Login', () => {
     beforeEach(() => {
-      cy.visit('http://lojaebac.ebaconline.art.br/minha-conta/')
+      cy.visit('minha-conta')
     })
 
     afterEach(() => {
@@ -41,7 +42,27 @@ describe('Funcionalidade: Login', () => {
         cy.get('#password').type('123456')
         cy.get('.woocommerce-form > .button').click()
         cy.get('.woocommerce-error > li').should('contain','Erro: Nome de usuário é obrigatório.')
-});
+    });
 
+    it('Deve fazer login com sucesso - Usando massa de dados', () => {
+        cy.get('#username').type(perfil.usuario)
+        cy.get('#password').type(perfil.senha)
+        cy.get('.woocommerce-form > .button').click()
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain','raffaela.monteiro')
+    });
+
+    it('Deve fazer login com sucesso - Usando fixture', () => {
+        cy.fixture('perfil').then(dados => {
+            cy.get('#username').type(dados.usuario)
+            cy.get('#password').type(dados.senha, { log: false }) //não mostrar nos logs o valor da senha
+            cy.get('.woocommerce-form > .button').click()
+            cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain','raffaela.monteiro')
+        })
+    });
+
+    it.only('Deve fazer login com sucesso - Usando comandos costumizados', () => {
+        cy.login(perfil.usuario,perfil.senha)
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain','raffaela.monteiro')
+      })
 
 })

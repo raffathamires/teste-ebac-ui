@@ -128,5 +128,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+<<<<<<< HEAD
 
 *.png
+=======
+.png
+>>>>>>> d91376bbacfd3c0a68ec19abd29e80def45acc54
