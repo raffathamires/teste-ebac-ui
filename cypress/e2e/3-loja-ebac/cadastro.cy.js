@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 
 describe('Funcionalidade: Cadastro', () => {
     beforeEach(() => {
-      cy.visit('http://lojaebac.ebaconline.art.br/minha-conta/')
+      cy.visit('minha-conta')
     })
 
     afterEach(() => {
@@ -50,6 +50,17 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get(':nth-child(4) > .button').click()
         cy.get('.woocommerce-error > li').should('contain','Erro: Uma conta já está registrada com seu endereço de e-mail. Faça login.')
         
+    });
+
+    it.only('Deve completar o cadastro com sucesso - Usando comando customizado', () => {
+        var primeiroNome = faker.person.firstName()
+        var ultimoNome = faker.person.lastName()
+        var email = faker.internet.email(primeiroNome)
+        var senha = 'doddy3009'
+
+        cy.preCadastro(email, senha, primeiroNome, ultimoNome)
+        cy.get('.woocommerce-message').should('contain','Detalhes da conta modificados com sucesso.')
+
     });
 
 });
