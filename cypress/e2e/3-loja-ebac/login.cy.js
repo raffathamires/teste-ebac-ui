@@ -60,7 +60,7 @@ describe('Funcionalidade: Login', () => {
         })
     });
 
-    it.only('Deve fazer login com sucesso - Usando comandos costumizados', () => {
+    it('Deve fazer login com sucesso - Usando comandos costumizados', () => {
         cy.login(perfil.usuario,perfil.senha)
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain','raffaela.monteiro')
       })

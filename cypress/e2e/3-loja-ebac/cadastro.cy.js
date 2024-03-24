@@ -52,7 +52,7 @@ describe('Funcionalidade: Cadastro', () => {
         
     });
 
-    it.only('Deve completar o cadastro com sucesso - Usando comando customizado', () => {
+    it('Deve completar o cadastro com sucesso - Usando comando customizado', () => {
         var primeiroNome = faker.person.firstName()
         var ultimoNome = faker.person.lastName()
         var email = faker.internet.email(primeiroNome)

@@ -15,5 +15,12 @@ Cypress.Commands.add('login', (usuario, senha) => {
     //tempo de espera
     cy.wait(5000)
     cy.get('.woocommerce-Button').click()
-   
+ })
+
+ Cypress.Commands.add('detalhesConta', (primeiroNome, ultimoNome, usuario) => { 
+    cy.get('#account_first_name').type(primeiroNome)
+    cy.get('#account_last_name').type(ultimoNome)
+    cy.get('#account_display_name').clear()
+    cy.get('#account_display_name').type(usuario)
+    cy.get('.woocommerce-Button').click()
  })
