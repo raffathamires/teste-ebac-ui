@@ -31,7 +31,17 @@ describe('Funcionalidade: Login', () => {
         cy.get('.woocommerce-error > li').should('contain','Erro: A senha fornecida para o e-mail raffaela.monteiro@gmail.com está incorreta.')
     });
 
+    it('Deve exibir mensagem de erro ao não inserir a senha', () => {
+        cy.get('#username').type('raffaela.monteiro@gmail.com')
+        cy.get('.woocommerce-form > .button').click()
+        cy.get('.woocommerce-error > li').should('contain','Erro: O campo da senha está vazio.')
+    });
 
+    it('Deve exibir mensagem de erro ao não inserir email', () => {
+        cy.get('#password').type('123456')
+        cy.get('.woocommerce-form > .button').click()
+        cy.get('.woocommerce-error > li').should('contain','Erro: Nome de usuário é obrigatório.')
+});
 
 
 })
